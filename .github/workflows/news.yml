@@ -1,0 +1,25 @@
+name: Daily News Sender
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # 每天 09:00 台灣時間 (UTC+8)
+  workflow_dispatch:      # 允許手動觸發
+
+jobs:
+  send-news:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run news sender
+        env:
+          LINE_CHANNEL_TOKEN: ${{ secrets.LINE_CHANNEL_TOKEN }}
+          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+        run: python news_sender.py
