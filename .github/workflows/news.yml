@@ -2,7 +2,7 @@ name: Daily News Sender
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 每天 08:00 台灣時間 (UTC+8)
+    - cron: '27 2 * * *'  # 測試用：10:27 台灣時間
   workflow_dispatch:      # 允許手動觸發
 
 jobs:
